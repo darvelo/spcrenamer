@@ -53,13 +53,22 @@ int main(int argc, char* argv[]) {
     // where they contain song files that need to be renamed
     // based on their internal metadata.
     vector<Package> games;
+    // can pass this to unrar program
+    string allGames;
 
+    string arg;
     for (unsigned int i = 1; i != argc; ++i) {
-        if (strcmp(argv[i], "-o") == 0) {
+        arg = argv[i];
+        if (arg == "-o") {
             // cache outputDir and skip next arg
-            outputDir = argv[++i];
+            outputDir = arg;
+            ++i;
         } else {
-            games.push_back(argv[i]);
+            // conversion to class type through constructor
+            games.push_back(arg);
+
+            allGames += arg;
+            allGames += " ";
         }
     }
 
@@ -69,6 +78,8 @@ int main(int argc, char* argv[]) {
     for (auto& game : games) {
         game.outputName();
     }
+
+    cout << allGames << endl;
 
     return 0;
 }
