@@ -17,9 +17,9 @@ using std::string;
 using std::vector;
 
 // directory where other directories are created to hold songs
-void makeOutputDir(string& outputDir) {
-    if (outputDir.empty()) {
-        outputDir = "processed";
+void makeBaseDir(string& baseDir) {
+    if (baseDir.empty()) {
+        baseDir = "processed";
     }
 
     // umask is 0220 by default.
@@ -27,9 +27,9 @@ void makeOutputDir(string& outputDir) {
     mode_t um = umask(0);
 
     // set output directory mode to 0755 (since umask is now 000);
-    int err = mkdir(outputDir.c_str(), 0755);
+    int err = mkdir(baseDir.c_str(), 0755);
     if (err) {
-        cout << "There was an error making the output directory: " << outputDir << endl;
+        cout << "There was an error making the output directory: " << baseDir << endl;
         exit(2);
     }
 
@@ -41,14 +41,14 @@ int main(int argc, char* argv[]) {
     if (argc == 1) {
         cout << "usage: "
              << argv[0]
-             << " [-o outputDir]"
+             << " [-o baseDir]"
              << " rsn_files..."
              << endl;
 
         exit(1);
     }
 
-    string outputDir;
+    string baseDir;
     // a list of files to unrar into folders of the same name,
     // where they contain song files that need to be renamed
     // based on their internal metadata.
@@ -60,8 +60,8 @@ int main(int argc, char* argv[]) {
     for (unsigned int i = 1; i != argc; ++i) {
         arg = argv[i];
         if (arg == "-o") {
-            // cache outputDir and skip next arg
-            outputDir = arg;
+            // cache baseDir and skip next arg
+            baseDir = arg;
             ++i;
         } else {
             // conversion to class type through constructor
@@ -72,11 +72,11 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    makeOutputDir(outputDir);
-    Package::baseDir = outputDir;
+    makeBaseDir(baseDir);
+    Package::baseDir = baseDir;
 
     for (auto& game : games) {
-        game.outputName();
+        game.output();
     }
 
     cout << allGames << endl;
