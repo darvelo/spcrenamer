@@ -10,6 +10,7 @@
 #include <sys/types.h>
 
 #include "Package.hpp"
+#include "unrar.hpp"
 
 using std::cout;
 using std::endl;
@@ -69,7 +70,8 @@ int main(int argc, char* argv[]) {
     Package::baseDir = baseDir;
 
     for (auto& game : games) {
-        game.output();
+        /* game.output(); */
+        game.unrar();
     }
 
     cout << allGames << endl;

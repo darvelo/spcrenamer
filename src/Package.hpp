@@ -29,6 +29,7 @@ public:
         }
     }
     int unrar() const;
+    friend int unrarFile(const Package&, std::string outputDir);
     bool isValid() { return valid; }
 private:
     std::string filename;
@@ -113,6 +114,16 @@ void Package::output(std::ostream& os = std::cout) {
 }
 
 int Package::unrar() const {
+    std::string outputDir = baseDir + '/' + packageDir;
+
+    // make dir for this SPC's songs in the baseDir
+    int err = mkdir(outputDir.c_str(), 0777);
+    if (err) {
+        std::cout << "There was an error making the output directory: " << outputDir << std::endl;
+        return 1;
+    }
+
+    return unrarFile(*this, outputDir);
 }
 
 #endif
