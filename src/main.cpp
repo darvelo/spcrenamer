@@ -22,19 +22,12 @@ void makeBaseDir(string& baseDir) {
         baseDir = "processed";
     }
 
-    // umask is 0220 by default.
-    // setting to 0 makes the mkdir `mode` arg easier to read.
-    mode_t um = umask(0);
-
-    // set output directory mode to 0755 (since umask is now 000);
-    int err = mkdir(baseDir.c_str(), 0755);
+    // set output directory mode to 0755 (since umask is 022);
+    int err = mkdir(baseDir.c_str(), 0777);
     if (err) {
         cout << "There was an error making the output directory: " << baseDir << endl;
         exit(2);
     }
-
-    // reset umask to default
-    um = umask(um);
 }
 
 int main(int argc, char* argv[]) {
