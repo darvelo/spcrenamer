@@ -4,6 +4,7 @@ LIB_UNRAR=./libunrar.so
 LIBS=$(LIB_GME) $(LIB_UNRAR)
 LIBFLAGS=-std=c++11
 LDFLAGS=-Wl,-rpath,'$ORIGIN' 
+SOURCE=main.cpp Package.cpp
 
 all:
-	$(CC) main.cpp $(LIBS) $(LIBFLAGS) $(LDFLAGS)
+	$(CC) $(SOURCE) $(LIBS) $(LIBFLAGS) $(LDFLAGS)
