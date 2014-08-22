@@ -87,6 +87,11 @@ void Package::output(ostream& os = cout) {
 }
 
 int Package::unrar() const {
+    if (!valid) {
+        cout << "The file " << filename << " was not valid!" << endl;
+        return -1;
+    }
+
     string outputDir = baseDir + '/' + packageDir;
 
     // make dir for this SPC's songs in the baseDir
