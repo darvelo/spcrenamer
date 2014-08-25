@@ -29,11 +29,11 @@ public:
     friend int unrarFile(const Package&, std::string outputDir);
     bool isValid() { return valid; }
 private:
+    bool valid = true;
     std::string filename;
     std::string packageDir;
-    bool valid = true;
-	long sample_rate = 44100;
-    Music_Emu* emu;
+    static Music_Emu* emu;
+    const static long sample_rate = 44100;
 };
 
 #endif

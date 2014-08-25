@@ -17,6 +17,7 @@ using std::ostream;
  *************/
 string Package::baseDir;
 string Package::extension = ".rsn";
+Music_Emu* Package::emu;
 
 /*************
  * functions *
