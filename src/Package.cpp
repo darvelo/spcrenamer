@@ -6,11 +6,39 @@
 #include "Package.hpp"
 #include "../extlib/game-music-emu-0.6.0/gme/gme.h"
 #include "../extlib/game-music-emu-0.6.0/gme/Music_Emu.h"
+#include "../extlib/libuv/include/uv.h"
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::ostream;
+
+static void readDir(uv_fs_t* req) {
+    if (req->result < 0) {
+        cout << "There was an error reading the directory: " << req->path << endl;
+    } else {
+        uv_dirent_t dent;
+
+        while (UV_EOF != uv_fs_readdir_next(req, &dent)) {
+            string name = dent.name;
+
+            if (dent.type != UV_DIRENT_FILE || name.substr(name.size() - 3) != "spc") {
+                continue;
+            }
+
+            name = req->path;
+            name += "/";
+            name += dent.name;
+
+            cout << "FILENAME WAS: " << name << endl;
+        }
+
+        cout << endl << "Succeeded! " << endl;
+    }
+
+    // clean up internal req structure
+    uv_fs_req_cleanup(req);
+}
 
 /*************
  * variables *
@@ -103,4 +131,11 @@ int Package::unrar() const {
     }
 
     return unrarFile(*this, outputDir);
+}
+
+void Package::renameFiles() {
+    const char* outputDir = (baseDir + '/' + packageDir).c_str();
+
+    uv_fs_readdir(uv_default_loop(), &dirReq, outputDir, O_RDONLY, readDir);
+    uv_run(uv_default_loop(), UV_RUN_DEFAULT);
 }

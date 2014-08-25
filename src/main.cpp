@@ -72,6 +72,7 @@ int main(int argc, char* argv[]) {
     for (auto& game : games) {
         /* game.output(); */
         game.unrar();
+        game.renameFiles();
     }
 
     cout << allGames << endl;

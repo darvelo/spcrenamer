@@ -4,6 +4,7 @@
 #include <string>
 #include "../extlib/game-music-emu-0.6.0/gme/gme.h"
 #include "../extlib/game-music-emu-0.6.0/gme/Music_Emu.h"
+#include "../extlib/libuv/include/uv.h"
 
 class Package {
 public:
@@ -28,8 +29,10 @@ public:
     int unrar() const;
     friend int unrarFile(const Package&, std::string outputDir);
     bool isValid() { return valid; }
+    void renameFiles();
 private:
     bool valid = true;
+    uv_fs_t dirReq;
     std::string filename;
     std::string packageDir;
     static Music_Emu* emu;
