@@ -1,0 +1,1 @@
+/usr/bin/c++    -fvisibility=hidden -fvisibility-inlines-hidden    CMakeFiles/demo.dir/Wave_Writer.cpp.o CMakeFiles/demo.dir/basics.c.o  -o demo  -L/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/gme -rdynamic ../gme/libgme.so.0.6.0 -Wl,-rpath,/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/gme 

@@ -1,0 +1,2 @@
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/demo/CMakeFiles/demo.dir
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/gme/CMakeFiles/gme.dir

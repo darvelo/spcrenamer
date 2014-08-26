@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/demo/Wave_Writer.h
+stddef.h
+-
+stdio.h
+-
+
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/demo/basics.c
+gme/gme.h
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/demo/gme/gme.h
+Wave_Writer.h
+/darth/website/project-to-rename-spc-titles/extlib/game-music-emu-0.6.0/demo/Wave_Writer.h
+stdlib.h
+-
+stdio.h
+-
+
+gme/gme.h
+
