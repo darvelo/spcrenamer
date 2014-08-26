@@ -137,5 +137,4 @@ void Package::renameFiles() {
     const char* outputDir = (baseDir + '/' + packageDir).c_str();
 
     uv_fs_readdir(uv_default_loop(), &dirReq, outputDir, O_RDONLY, readDir);
-    uv_run(uv_default_loop(), UV_RUN_DEFAULT);
 }

@@ -11,6 +11,7 @@
 
 #include "Package.hpp"
 #include "unrar.hpp"
+#include "../extlib/libuv/include/uv.h"
 
 using std::cout;
 using std::endl;
@@ -68,6 +69,8 @@ int main(int argc, char* argv[]) {
         game.unrar();
         game.renameFiles();
     }
+
+    uv_run(uv_default_loop(), UV_RUN_DEFAULT);
 
     return 0;
 }
