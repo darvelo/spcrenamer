@@ -72,10 +72,10 @@ Package::Package(string fname)
     packageDir = filename.substr(slash, filename.size() - slash - extensionSize);
 }
 
-bool Package::isFile(const string &filename) const {
+bool Package::isFile(const string &fname) const {
     struct stat info;
     // stat succeeds && not a directory
-    return !stat(filename.c_str(), &info) && !(info.st_mode & S_IFDIR);
+    return !stat(fname.c_str(), &info) && !(info.st_mode & S_IFDIR);
 }
 
 bool Package::isFile() const {
