@@ -6,3 +6,14 @@ Session.vim
 .netrwhist
 .vimrc
 *~
+
+# library packages
+*.bz2
+
+# precompiled headers
+*.gch
+
+# data directories
+src/processed/
+rsn/
+a.out
