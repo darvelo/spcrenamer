@@ -136,5 +136,7 @@ int Package::unrar() const {
 void Package::renameFiles() {
     const char* outputDir = (baseDir + '/' + packageDir).c_str();
 
+    dirReq.data = this;
+
     uv_fs_readdir(uv_default_loop(), &dirReq, outputDir, O_RDONLY, readDir);
 }
