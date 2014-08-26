@@ -65,7 +65,6 @@ int main(int argc, char* argv[]) {
     Package::baseDir = baseDir;
 
     for (auto& game : games) {
-        /* game.output(); */
         game.unrar();
         game.renameFiles();
     }

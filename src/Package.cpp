@@ -82,7 +82,7 @@ bool Package::isFile() const {
     return isFile(filename);
 }
 
-void Package::output(ostream& os = cout) {
+string Package::getSpcInfo(const string& spcFilename) {
     // new filename based on track name
     string song;
 
@@ -94,31 +94,68 @@ void Package::output(ostream& os = cout) {
         return song;
     }
 
-    gme_open_file(filename.c_str(), &emu, sample_rate);
+    // a sample rate would be passed as the second arg here (unsigned long sample_rate = 44100),
+    // *if* we needed access to the actual data in the spc file, e.g. transcoding to wav
+    gme_open_file(spcFilename.c_str(), &emu, gme_info_only);
 
     gme_info_t* trackInfo;
     gme_track_info( emu, &trackInfo, 0 );
 
-    cout
-        /* times in milliseconds; -1 if unknown */
-        << trackInfo->length << endl
-        << trackInfo->intro_length << endl
-        << trackInfo->loop_length << endl
-        /* empty string if not available */
-        << trackInfo->system << endl
-        << trackInfo->game  << endl
-        << trackInfo->song << endl
-        << trackInfo->author  << endl
-        << trackInfo->copyright  << endl
-        << trackInfo->comment   << endl
-        << trackInfo->dumper   << endl
-        << endl;
+    // possible trackInfo values...
+    /* cout */
+    /*     /1* times in milliseconds; -1 if unknown *1/ */
+    /*     << trackInfo->length << endl */
+    /*     << trackInfo->intro_length << endl */
+    /*     << trackInfo->loop_length << endl */
+    /*     /1* empty string if not available *1/ */
+    /*     << trackInfo->system << endl */
+    /*     << trackInfo->game  << endl */
+    /*     << trackInfo->song << endl */
+    /*     << trackInfo->author  << endl */
+    /*     << trackInfo->copyright  << endl */
+    /*     << trackInfo->comment   << endl */
+    /*     << trackInfo->dumper   << endl */
+    /*     << endl; */
+
+    // add track number designation from original filename, e.g. "s07" in filename "dkc-s07.spc"
+    auto trackNumBegin = spcFilename.find_last_of('-');
+    // move past dash
+    ++trackNumBegin;
+
+    song += spcFilename.substr(
+            trackNumBegin,
+            // the null byte takes care of the '.' in ".spc"
+            spcFilename.size() - trackNumBegin - sizeof("spc")
+    );
+
+    song += '-';
+    song += trackInfo->song;
+
+    // if not found, string::npos + 1 == 0
+    auto slash = filename.find_last_of('/');
+    // move past the slash
+    ++slash;
+
+    size_t extensionSize = extension.size();
+    if (filename.substr(filename.size() - extension.size()) != extension) {
+        extensionSize = 0;
+    }
+
+    packageDir = filename.substr(slash, filename.size() - slash - extensionSize);
+    // replace any slashes with underscores
+    for (auto &c : song) {
+        if (c == '/') {
+            c = '_';
+        }
+    }
+
+    string newFilename = baseDir + '/' + packageDir + '/' + song;
+    newFilename += ".spc";
 
     gme_free_info( trackInfo );
     delete emu;
 
-    if (valid) os << baseDir << "/" << packageDir << endl;
-    else os << filename << " not valid!" << endl;
+    return newFilename;
 }
 
 int Package::unrar() const {

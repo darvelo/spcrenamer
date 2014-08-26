@@ -19,9 +19,9 @@ public:
     /* functions */
     inline bool isFile() const;
     inline bool isFile(const std::string&) const;
-    void output(std::ostream&);
     int unrar() const;
     friend int unrarFile(const Package&, std::string outputDir);
+    std::string getSpcInfo(const std::string& spcFilename);
     bool isValid() { return valid; }
     void renameFiles();
 private:
@@ -35,7 +35,6 @@ private:
     std::string packageDir;
     // libgme structs/vars
     static Music_Emu* emu;
-    const static long sample_rate = 44100;
 };
 
 #endif
