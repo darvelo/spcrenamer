@@ -20,12 +20,6 @@ public:
     inline bool isFile() const;
     inline bool isFile(const std::string&) const;
     void output(std::ostream&);
-    void handle_error(const char* str) const {
-        if (str) {
-            printf( "Error: %s\n", str ); getchar();
-            exit( EXIT_FAILURE );
-        }
-    }
     int unrar() const;
     friend int unrarFile(const Package&, std::string outputDir);
     bool isValid() { return valid; }

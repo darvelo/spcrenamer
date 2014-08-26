@@ -9,6 +9,7 @@
 #include "../extlib/libuv/include/uv.h"
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::string;
 using std::ostream;
@@ -82,11 +83,16 @@ bool Package::isFile() const {
 }
 
 void Package::output(ostream& os = cout) {
+    // new filename based on track name
+    string song;
+
     // Determine file type
     gme_type_t file_type;
-    handle_error( gme_identify_file( filename.c_str(), &file_type ) );
-    if ( !file_type )
-        handle_error( "Unsupported music type" );
+    const char* err = gme_identify_file(spcFilename.c_str(), &file_type);
+    if (err || !file_type) {
+        cerr << "Unsupported music type in filename " << spcFilename;
+        return song;
+    }
 
     gme_open_file(filename.c_str(), &emu, sample_rate);
 
@@ -117,7 +123,7 @@ void Package::output(ostream& os = cout) {
 
 int Package::unrar() const {
     if (!valid) {
-        cout << "The file " << filename << " was not valid!" << endl;
+        cerr << "The file " << filename << " was not valid!" << endl;
         return -1;
     }
 
@@ -126,7 +132,7 @@ int Package::unrar() const {
     // make dir for this SPC's songs in the baseDir
     int err = mkdir(outputDir.c_str(), 0777);
     if (err) {
-        cout << "There was an error making the output directory: " << outputDir << endl;
+        cerr << "There was an error making the output directory: " << outputDir << endl;
         return 1;
     }
 
