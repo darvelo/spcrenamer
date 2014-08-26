@@ -47,8 +47,6 @@ int main(int argc, char* argv[]) {
     // where they contain song files that need to be renamed
     // based on their internal metadata.
     vector<Package> games;
-    // can pass this to unrar program
-    string allGames;
 
     string arg;
     for (unsigned int i = 1; i != argc; ++i) {
@@ -60,9 +58,6 @@ int main(int argc, char* argv[]) {
         } else {
             // conversion to class type through constructor
             games.push_back(arg);
-
-            allGames += arg;
-            allGames += " ";
         }
     }
 
@@ -74,8 +69,6 @@ int main(int argc, char* argv[]) {
         game.unrar();
         game.renameFiles();
     }
-
-    cout << allGames << endl;
 
     return 0;
 }
