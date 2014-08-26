@@ -53,8 +53,7 @@ int main(int argc, char* argv[]) {
         arg = argv[i];
         if (arg == "-o") {
             // cache baseDir and skip next arg
-            baseDir = arg;
-            ++i;
+            baseDir = argv[++i];
         } else {
             // conversion to class type through constructor
             games.push_back(arg);
