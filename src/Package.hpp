@@ -31,10 +31,15 @@ public:
     bool isValid() { return valid; }
     void renameFiles();
 private:
+    // invalid if not a rar file
     bool valid = true;
+    // libuv request object
     uv_fs_t dirReq;
+    // rar filename
     std::string filename;
+    // output dir of unpacked rar
     std::string packageDir;
+    // libgme structs/vars
     static Music_Emu* emu;
     const static long sample_rate = 44100;
 };
