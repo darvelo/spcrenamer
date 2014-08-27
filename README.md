@@ -6,7 +6,7 @@ You can actually download old-school SNES music via http://www.snesmusic.org. Af
 
 Once the ".rsn" files are renamed, they can be extracted as RAR files. The only trouble is, the files within conform to a standardized 8.3 filename structure. They are *not* named by the title of the original song.
 
-**This project will unrar the ".rsn" files passed in as arguments into folders inside a designated output directory (`processed/` be default) and rename all extracted ".spc" song files to their original song titles automatically.**
+**This project will unrar the ".rsn" files passed in as arguments into folders inside a designated output directory (`processed/` by default) and rename all extracted ".spc" song files to their original song titles automatically.**
 
 ## Usage
 
