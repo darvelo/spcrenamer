@@ -11,5 +11,5 @@ Once the ".rsn" files are renamed, they can be extracted as RAR files. The only 
 ## Usage
 
 ```
-spcrename [-o outputDir] RSN_FILE...
+spcrenamer [-o outputDir] RSN_FILE...
 ```
