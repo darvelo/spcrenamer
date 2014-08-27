@@ -2,9 +2,9 @@
 #define PACKAGE_H
 
 #include <string>
-#include "../extlib/game-music-emu-0.6.0/gme/gme.h"
-#include "../extlib/game-music-emu-0.6.0/gme/Music_Emu.h"
-#include "../extlib/libuv/include/uv.h"
+#include "../lib/game-music-emu-0.6.0/gme/gme.h"
+#include "../lib/game-music-emu-0.6.0/gme/Music_Emu.h"
+#include "../lib/libuv/include/uv.h"
 
 class Package {
 public:

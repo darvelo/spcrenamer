@@ -19,7 +19,7 @@
 
 #define _UNIX
 #define  RARDLL
-#include "../extlib/unrar-5.1.7/dll.hpp"
+#include "../lib/unrar-5.1.7/dll.hpp"
 
 // same as HANDLE in dll.hpp
 #define RARHANDLE void *

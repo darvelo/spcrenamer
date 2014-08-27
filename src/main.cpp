@@ -10,7 +10,7 @@
 #include <sys/types.h>
 
 #include "Package.hpp"
-#include "../extlib/libuv/include/uv.h"
+#include "../lib/libuv/include/uv.h"
 
 /*
     UnRAR source code may be used in any software to handle
