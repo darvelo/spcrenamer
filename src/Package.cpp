@@ -20,10 +20,6 @@ static void renamedSpcFile(uv_fs_t* req) {
         cerr << "There was an error renaming file "
              << req->path
              << endl;
-    } else {
-        cout << "Renamed "
-             << req->path
-             << endl;
     }
 
     // clean up internal req structure
@@ -49,14 +45,10 @@ static void readDir(uv_fs_t* req) {
             name += "/";
             name += dent.name;
 
-            cout << endl << "FILENAME WAS: " << name << endl;
-
             Package* package = static_cast<Package*>(req->data);
             string newFilename = package->getSpcInfo(name);
 
             if (!newFilename.empty()) {
-                cout << "NEW FILENAME WAS: " << newFilename << endl;
-
                 // allocate memory for new req
                 uv_fs_t* renameReq;
                 renameReq = (uv_fs_t*) malloc(sizeof(uv_fs_t));
@@ -64,8 +56,6 @@ static void readDir(uv_fs_t* req) {
                 uv_fs_rename(uv_default_loop(), renameReq, name.c_str(), newFilename.c_str(), renamedSpcFile);
             }
         }
-
-        cout << endl << "Succeeded! " << endl;
     }
 
     // clean up internal req structure
