@@ -1,7 +1,7 @@
 #include <iostream>
-#include <string>
 #include <vector>
-// for mkdir()
+#include <string>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -46,14 +46,12 @@ int main(int argc, char* argv[]) {
     // based on their internal metadata.
     vector<Package> games;
 
-    string arg;
     for (unsigned int i = 1; i != argc; ++i) {
-        arg = argv[i];
-        if (arg == "-o") {
+        if (strcmp(argv[i], "-o") == 0) {
             // cache baseDir and skip next arg
             baseDir = argv[++i];
         } else {
-            Package game(arg);
+            Package game(argv[i]);
 
             if (game.isValid()) {
                 games.push_back(game);
