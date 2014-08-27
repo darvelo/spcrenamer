@@ -20,7 +20,7 @@ makeoutputdir:
 	mkdir $(OUTPUT_DIR)
 
 copylibs:
-	cp $(COMPILED_LIBS)/*.a $(COMPILED_LIBS)/*.so $(OUTPUT_DIR)
+	cp $(COMPILED_LIBS)/*.so $(OUTPUT_DIR)
 
 clean:
 	rm -rf $(OUTPUT_DIR)
