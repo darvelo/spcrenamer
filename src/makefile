@@ -6,6 +6,7 @@ LIBS=$(LIB_GME) $(LIB_UNRAR) $(LIB_UV)
 LIBFLAGS=-std=c++11
 LDFLAGS=-Wl,-rpath,'$ORIGIN' -pthread
 SOURCE=main.cpp Package.cpp unrar.cpp
+OUTPUT=-o spcrename
 
 all:
-	$(CC) $(SOURCE) $(LIBS) $(LIBFLAGS) $(LDFLAGS)
+	$(CC) $(OUTPUT) $(SOURCE) $(LIBS) $(LIBFLAGS) $(LDFLAGS)
