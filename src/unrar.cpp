@@ -25,6 +25,7 @@
 #define RARHANDLE void *
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::string;
 
@@ -53,7 +54,7 @@ int unrarFile(const Package& spcPackage, string spcOutputDir = ".") {
 
   if (archiveInfo.OpenResult != 0) {
     RARCloseArchive(rarFile);
-    cout  << "unrar couldn't open" << endl;
+    cerr  << "unrar couldn't open" << endl;
     return 2;
   }
 
@@ -69,14 +70,14 @@ int unrarFile(const Package& spcPackage, string spcOutputDir = ".") {
     // if the last param (*DestName) is NULL, the previous one (*DestPath) will be the output dir
     if (RARProcessFile(rarFile, RAR_EXTRACT, outputDir, NULL) != 0) {
       RARCloseArchive(rarFile);
-      cout  << "error processing this file\n" << endl;
+      cerr  << "error processing this file\n" << endl;
       return 3;
     }
 
   }
 
   if (RHCode != ERAR_END_ARCHIVE) {
-    cout  << "error traversing through archive: " << RHCode << endl;
+    cerr  << "error traversing through archive: " << RHCode << endl;
   }
 
   RARCloseArchive(rarFile);

@@ -1,10 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// fork() and exec()
-#include <unistd.h>
-// strcmp() for argv[]
-#include <cstring>
 // for mkdir()
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -13,19 +9,23 @@
 #include "../lib/libuv/include/uv.h"
 
 /*
-    UnRAR source code may be used in any software to handle
-    RAR archives without limitations free of charge, but cannot be
-    used to develop RAR (WinRAR) compatible archiver and to
-    re-create RAR compression algorithm, which is proprietary.
-    Distribution of modified UnRAR source code in separate form
-    or as a part of other software is permitted, provided that
-    full text of this paragraph, starting from "UnRAR source code"
-    words, is included in license, or in documentation if license
-    is not available, and in source code comments of resulting package.
+ *  UNRAR LICENSE
+ *  -------------
+ *
+ *  UnRAR source code may be used in any software to handle
+ *  RAR archives without limitations free of charge, but cannot be
+ *  used to develop RAR (WinRAR) compatible archiver and to
+ *  re-create RAR compression algorithm, which is proprietary.
+ *  Distribution of modified UnRAR source code in separate form
+ *  or as a part of other software is permitted, provided that
+ *  full text of this paragraph, starting from "UnRAR source code"
+ *  words, is included in license, or in documentation if license
+ *  is not available, and in source code comments of resulting package.
 */
 #include "unrar.hpp"
 
 using std::cout;
+using std::cerr;
 using std::endl;
 using std::string;
 using std::vector;
@@ -39,7 +39,7 @@ void makeBaseDir(string& baseDir) {
     // set output directory mode to 0755 (since umask is 022);
     int err = mkdir(baseDir.c_str(), 0777);
     if (err) {
-        cout << "There was an error making the output directory: " << baseDir << endl;
+        cerr << "There was an error making the output directory: " << baseDir << endl;
         exit(2);
     }
 }
