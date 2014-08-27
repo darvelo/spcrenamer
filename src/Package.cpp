@@ -15,6 +15,9 @@ using std::endl;
 using std::string;
 using std::ostream;
 
+/*************
+ *   libuv   *
+ *************/
 static void renamedSpcFile(uv_fs_t* req) {
     if (req->result < 0) {
         cerr << "There was an error renaming file "
@@ -46,7 +49,7 @@ static void readDir(uv_fs_t* req) {
             name += dent.name;
 
             Package* package = static_cast<Package*>(req->data);
-            string newFilename = package->getSpcInfo(name);
+            string newFilename = package->getSpcTitle(name);
 
             if (!newFilename.empty()) {
                 // allocate memory for new req
@@ -103,7 +106,7 @@ bool Package::isFile() const {
     return isFile(filename);
 }
 
-string Package::getSpcInfo(const string& spcFilename) {
+string Package::getSpcTitle(const string& spcFilename) {
     // new filename based on track name
     string song;
 

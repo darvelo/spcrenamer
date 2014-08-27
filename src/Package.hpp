@@ -18,14 +18,14 @@ public:
 
     /* functions */
     inline void process() { unrar(); renameFiles(); };
-    std::string getSpcInfo(const std::string& spcFilename);
+    std::string getSpcTitle(const std::string& spcFilename);
     inline bool isValid() { return valid; }
 private:
     /* functions */
     inline bool isFile() const;
     inline bool isFile(const std::string&) const;
-    friend int unrarFile(const Package&, std::string outputDir);
     int unrar() const;
+    friend int unrarFile(const Package&, std::string outputDir);
     void renameFiles();
 
     // invalid if not a rar file
@@ -36,7 +36,7 @@ private:
     std::string filename;
     // output dir of unpacked rar
     std::string packageDir;
-    // libgme structs/vars
+    // libgme class
     static Music_Emu* emu;
 };
 
