@@ -17,14 +17,17 @@ public:
     static std::string extension;
 
     /* functions */
+    inline void process() { unrar(); renameFiles(); };
+    std::string getSpcInfo(const std::string& spcFilename);
+private:
+    /* functions */
     inline bool isFile() const;
     inline bool isFile(const std::string&) const;
-    int unrar() const;
+    inline bool isValid() { return valid; }
     friend int unrarFile(const Package&, std::string outputDir);
-    std::string getSpcInfo(const std::string& spcFilename);
-    bool isValid() { return valid; }
+    int unrar() const;
     void renameFiles();
-private:
+
     // invalid if not a rar file
     bool valid = true;
     // libuv request object

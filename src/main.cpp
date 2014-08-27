@@ -12,7 +12,6 @@
 #include "Package.hpp"
 #include "../extlib/libuv/include/uv.h"
 
-
 /*
     UnRAR source code may be used in any software to handle
     RAR archives without limitations free of charge, but cannot be
@@ -78,8 +77,7 @@ int main(int argc, char* argv[]) {
     Package::baseDir = baseDir;
 
     for (auto& game : games) {
-        game.unrar();
-        game.renameFiles();
+        game.process();
     }
 
     uv_run(uv_default_loop(), UV_RUN_DEFAULT);
