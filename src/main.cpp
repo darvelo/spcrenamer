@@ -68,8 +68,11 @@ int main(int argc, char* argv[]) {
             // cache baseDir and skip next arg
             baseDir = argv[++i];
         } else {
-            // conversion to class type through constructor
-            games.push_back(arg);
+            Package game(arg);
+
+            if (game.isValid()) {
+                games.push_back(game);
+            }
         }
     }
 

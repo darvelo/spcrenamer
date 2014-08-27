@@ -19,11 +19,11 @@ public:
     /* functions */
     inline void process() { unrar(); renameFiles(); };
     std::string getSpcInfo(const std::string& spcFilename);
+    inline bool isValid() { return valid; }
 private:
     /* functions */
     inline bool isFile() const;
     inline bool isFile(const std::string&) const;
-    inline bool isValid() { return valid; }
     friend int unrarFile(const Package&, std::string outputDir);
     int unrar() const;
     void renameFiles();
