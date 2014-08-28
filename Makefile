@@ -7,11 +7,11 @@ LIBS=$(LIB_GME) $(LIB_UNRAR) $(LIB_UV)
 LIBFLAGS=-std=c++11
 LDFLAGS=-Wl,-rpath,'$ORIGIN' -pthread
 SOURCE_DIR=./src
-SOURCE_FILES=$(SOURCE_DIR)/main.cpp $(SOURCE_DIR)/Package.cpp $(SOURCE_DIR)/unrar.cpp
+SOURCE_FILES=$(SOURCE_DIR)/main.cpp $(SOURCE_DIR)/Package.cpp $(SOURCE_DIR)/unrar.cpp $(SOURCE_DIR)/libuvHandlers.cpp
 OUTPUT_DIR=./out
 OUTPUT=-o $(OUTPUT_DIR)/spcrenamer
 
-all: makeoutputdir copylibs
+all: clean makeoutputdir copylibs
 	$(CC) $(OUTPUT) $(SOURCE_FILES) $(LIBS) $(LIBFLAGS) $(LDFLAGS)
 
 .PHONY: mkoutputdir copylibs clean
