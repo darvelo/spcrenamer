@@ -40,4 +40,16 @@ private:
     static Music_Emu* emu;
 };
 
+inline bool
+Package::isFile(const std::string &fname) const {
+    struct stat info;
+    // stat succeeds && not a directory
+    return !stat(fname.c_str(), &info) && !(info.st_mode & S_IFDIR);
+}
+
+inline bool
+Package::isFile() const {
+    return isFile(filename);
+}
+
 #endif
