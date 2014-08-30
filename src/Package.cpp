@@ -34,7 +34,7 @@ Package::Package(string fname)
     }
 
     // if not found, string::npos + 1 == 0
-    auto slash = filename.find_last_of('/');
+    auto slash = filename.rfind('/');
     // move past the slash
     ++slash;
 
@@ -82,7 +82,7 @@ string Package::getSpcTitle(const string& spcFilename) {
     /*     << endl; */
 
     // add track number designation from original filename, e.g. "s07" in filename "dkc-s07.spc"
-    auto trackNumBegin = spcFilename.find_last_of('-');
+    auto trackNumBegin = spcFilename.rfind('-');
     // move past dash
     ++trackNumBegin;
 
@@ -96,7 +96,7 @@ string Package::getSpcTitle(const string& spcFilename) {
     song += trackInfo->song;
 
     // if not found, string::npos + 1 == 0
-    auto slash = filename.find_last_of('/');
+    auto slash = filename.rfind('/');
     // move past the slash
     ++slash;
 
