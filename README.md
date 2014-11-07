@@ -19,15 +19,13 @@ spcrenamer [-o outputDir] RSN_FILE...
 Possible folder structure (but do it however you like):
 
 ```
------ rsn/
-   |   \--- abc.rsn
-   |    --- xyz.rsn
-   |
-   -- renamed/
-   |
-   -- spcrenamer/
-       \-- spcrenamer
-        -- libunrar.so
+├── rsn
+│   ├── abc.rsn
+│   └── xyz.rsn
+├── renamed
+└── spcrenamer
+    ├── spcrenamer
+    └── libunrar.so
 ```
 
 Typing this command from the root:
@@ -39,17 +37,17 @@ Typing this command from the root:
 Will produce:
 
 ```
-renamed/
- \-- abc/
- |    \-- 01-Title.spc
- |    |-- 02-Intro.spc
- |    |   ...
- |    |-- etc.
- \-- xyz/
-      \-- 01-Title.spc
-      |-- 02-Intro.spc
-      |   ...
-      |-- etc.
+renamed
+├── abc
+│   ├── 01-Title.spc
+│   ├── 02-Intro.spc
+│   │   ...
+│   └── etc.
+└── xyz
+    ├── 01-Title.spc
+    ├── 02-Intro.spc
+    │   ...
+    └── etc.
 ```
 
 If you were just to extract the rsn files manually with an archiver, the spc filenames would resemble `abc-01.spc`. This application will dig into the header of each spc file for its song title, and rename it as above. The filename of the rsn is used to extract the spc files to a directory of the same name. Until this project can rename the rsn files to their game titles, using [renset](http://www.snesmusic.org/v2/players.php#renset) is recommended before you begin.
