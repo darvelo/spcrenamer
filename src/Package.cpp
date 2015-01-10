@@ -95,17 +95,6 @@ string Package::getSpcTitle(const string& spcFilename) {
     song += '-';
     song += trackInfo->song;
 
-    // if not found, string::npos + 1 == 0
-    auto slash = filename.rfind('/');
-    // move past the slash
-    ++slash;
-
-    size_t extensionSize = extension.size();
-    if (filename.substr(filename.size() - extension.size()) != extension) {
-        extensionSize = 0;
-    }
-
-    packageDir = filename.substr(slash, filename.size() - slash - extensionSize);
     // replace any slashes with underscores
     for (auto &c : song) {
         if (c == '/') {
@@ -113,8 +102,7 @@ string Package::getSpcTitle(const string& spcFilename) {
         }
     }
 
-    string newFilename = baseDir + '/' + packageDir + '/' + song;
-    newFilename += ".spc";
+    string newFilename = baseDir + '/' + packageDir + '/' + song + ".spc";
 
     gme_free_info( trackInfo );
     delete emu;
